@@ -11,7 +11,7 @@ int main() {
   auto v=input<double>(n); // vector<double>(n)
   auto t=input<int,char,double>(); // tuple<int,char,double>
 
-  ifstream fs("input.txt");
+  std::ifstream fs("input.txt");
   // file contains
   // 5
   // 10 20 30 40 50
