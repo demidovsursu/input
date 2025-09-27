@@ -1,0 +1,85 @@
+#pragma once
+#include <vector>
+#include <iostream>
+#include <utility>
+#include <tuple>
+template <typename T>
+inline T input(std::istream& i) {
+  T t;
+  i>>t;
+  return t;
+}
+template <typename T>
+inline T input() {
+  return input<T>(std::cin);
+}
+template <typename T>
+inline std::vector<T> input(std::istream& i, std::size_t n) {
+  std::vector<T> t(n);
+  for(auto &ti: t) i>>ti;
+  return t;
+}
+template <typename T>
+inline std::vector<T> input(std::size_t n) {
+  return input<T>(std::cin,n);
+}
+
+template <typename T1, typename T2>
+inline std::pair<T1,T2> input(std::istream& i) {
+  std::pair<T1,T2> t;
+  i>>t.first>>t.second;
+  return t;
+}
+template <typename T1, typename T2>
+inline std::pair<T1,T2> input() {
+  return input<T1,T2>(std::cin);
+}
+template <typename T1, typename T2>
+inline std::vector<std::pair<T1,T2>> input(std::istream& i, std::size_t n) {
+  std::vector<std::pair<T1,T2>> t;
+  for(auto &ti: t) i>>ti.first>>ti.second;
+  return t;
+}
+template <typename T1, typename T2>
+inline std::vector<std::pair<T1,T2>> input(std::size_t n) {
+  return input<T1,T2>(std::cin, n);
+}
+
+template<typename Tuple, std::size_t N>
+struct TupleInput
+{
+    static void input(std::istream& i, Tuple& t)
+    {
+        TupleInput<Tuple, N-1>::input(i,t);
+        i>>std::get<N-1>(t);
+    }
+};
+
+template<class Tuple>
+struct TupleInput<Tuple, 1>
+{
+    static void input(std::istream& i, Tuple& t)
+    {
+        i>>std::get<0>(t);
+    }
+};
+template <typename T1, typename T2, typename T3, typename... Tn>
+inline std::tuple<T1,T2, T3, Tn...> input(std::istream& i) {
+  std::tuple<T1,T2,T3, Tn...> t;
+  TupleInput<decltype(t), sizeof...(Tn)+3>::input(i,t);
+  return t;
+}
+template <typename T1, typename T2, typename T3, typename... Tn>
+inline std::tuple<T1,T2,T3,Tn...> input() {
+  return input<T1,T2,T3, Tn...>(std::cin);
+}
+template <typename T1, typename T2, typename T3, typename... Tn>
+inline std::vector<std::tuple<T1,T2, T3, Tn...>> input(std::istream& i, std::size_t n) {
+  std::vector<std::tuple<T1,T2, T3, Tn...>> t;
+  for(auto &ti: t) TupleInput<typename std::vector<std::tuple<T1,T2, T3, Tn...>>::value_type, sizeof...(Tn)+3>::input(i,ti);
+  return t;
+}
+template <typename T1, typename T2, typename T3, typename... Tn>
+inline std::vector<std::tuple<T1,T2,T3, Tn...>> input(std::size_t n) {
+  return input<T1,T2,T3, Tn...>(std::cin, n);
+}
