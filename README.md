@@ -13,6 +13,8 @@ int main() {
   auto [x,y]=input<double,double>(); // pair<double,double>
   auto v=input<double>(n); // vector<double>(n)
   auto t=input<int,char,double>(); // tuple<int,char,double>
+
+  auto s=input(); // input to the end of line == getline(cin,s)
   
   std::ifstream fs("input.txt");
   // file contains
@@ -20,5 +22,6 @@ int main() {
   // 10 20 30 40 50
   auto m=input<int>(fs); // m=5
   auto a=input<int>(fs,m); // a={10,20,30,40,50}
+  auto lines=input(fs,100); // input 100 lines or lines to EOF. Use -1 for input all lines
 }
 ```

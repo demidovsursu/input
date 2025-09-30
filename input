@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 #include <iostream>
 #include <utility>
 #include <tuple>
@@ -82,4 +83,25 @@ inline std::vector<std::tuple<T1,T2, T3, Tn...>> input(std::istream& i, std::siz
 template <typename T1, typename T2, typename T3, typename... Tn>
 inline std::vector<std::tuple<T1,T2,T3, Tn...>> input(std::size_t n) {
   return input<T1,T2,T3, Tn...>(std::cin, n);
+}
+
+inline std::string input(std::istream& i) {
+  std::string t;
+  std::getline(i,t);
+  return t;
+}
+inline std::string input() {
+  return input(std::cin);;
+}
+inline std::vector<std::string> input(std::istream& i, std::size_t n) {
+  std::vector<std::string> t;
+  std::string s;
+  for(std::size_t j=0; j<n && i.peek()!=EOF; ++j) {
+    std::getline(i,s);
+    t.push_back(s);
+  }
+  return t;
+}
+inline std::vector<std::string> input(std::size_t n) {
+  return input(std::cin,n);
 }
